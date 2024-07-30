@@ -1,1 +1,1 @@
-# workshop
+Create a webpage that fetches data from a public API (e.g., GitHub API) and displays a list of repositories for a given user. Implement error handling for network issues and display appropriate messages for different error states.
