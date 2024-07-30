@@ -1,0 +1,49 @@
+<!Create a webpage that fetches data from a public API (e.g., GitHub API) and displays a list of repositories for a given user. Implement error handling for network issues and display appropriate messages for different error states.>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repositories</title>
+
+</head>
+<body style="background-color:black;color:white;">
+    <h1>GitHub Repositories</h1>
+    <ul id="repo-list"></ul>
+    <p id="error-message"></p>
+    
+
+<script>
+const username = 'sushma0762'; 
+const repoList = document.getElementById('repo-list');
+const errorMessage = document.getElementById('error-message');
+
+async function fetchRepositories() {
+    try {
+        const response = await fetch(`https://api.github.com/users/${username}/repos`);
+        if (!response.ok) {
+            throw new Error('Network response was not OK');
+        }
+        const data = await response.json();
+        displayRepositories(data);
+    } catch (error) {
+        errorMessage.textContent = 'Error,try again!';
+    }
+    
+}
+function displayRepositories(repositories) {
+    repoList.innerHTML = ''; // Clear existing list
+    repositories.forEach(repo => {
+        const li = document.createElement('li');
+        li.textContent = repo.name;
+        repoList.appendChild(li);
+    });
+}
+
+
+
+
+fetchRepositories();
+</script>
+</body>
+</html>
